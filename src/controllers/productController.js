@@ -25,7 +25,22 @@ getOneProducts = (req, res) => {
   // caso não encontre o produto retornar o erro
 };
 
+createProduct = (req, res) => {
+  const product = req.body;
+  if (Object.keys(product).length > 0) {
+    //verificar o tamanho para enviar apenas se tiver algum parametro
+    products.push(product); //se for valido vai enviar com o PUSH
+    res.status(201).send(product);
+  } else {
+    res.status(406).send({
+      success: "false",
+      message: "Invalid product data",
+    }); //retorna o erro
+  }
+};
+
 module.exports = {
   getProducts,
   getOneProducts,
+  createProduct,
 };
