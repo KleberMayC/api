@@ -35,12 +35,42 @@ createProduct = (req, res) => {
     res.status(406).send({
       success: "false",
       message: "Invalid product data",
+      data: createProduct,
     }); //retorna o erro
   }
+};
+
+// Função para atualizar um produto
+updateProduct = (req, res) => {
+  const { id } = req.params;
+  const productIndex = findProductIndex(id);
+
+  if (productIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      message: `Produto não encontrado com o ID ${id}`,
+    });
+  }
+
+  // Atualizar o produto existente com os novos dados
+  const updatedProduct = { ...products[productIndex], ...req.body };
+  products[productIndex] = updatedProduct;
+
+  return res.status(200).json({
+    success: true,
+    message: "Produto atualizado com sucesso",
+    data: updatedProduct,
+  });
+};
+
+// Função para encontrar o índice do produto pelo ID
+const findProductIndex = (id) => {
+  return products.findIndex((product) => product.id === Number(id));
 };
 
 module.exports = {
   getProducts,
   getOneProducts,
   createProduct,
+  updateProduct,
 };
