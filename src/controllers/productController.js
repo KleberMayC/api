@@ -63,9 +63,32 @@ updateProduct = (req, res) => {
   });
 };
 
-// Função para encontrar o índice do produto pelo ID
 const findProductIndex = (id) => {
   return products.findIndex((product) => product.id === Number(id));
+};
+
+removeProduct = (req, res) => {
+  const { id } = req.params;
+  console.log("ID recebido:", id);
+  const productIndex = findProductIndex(id);
+  console.log("Índice do produto:", productIndex);
+
+  if (productIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      message: `Produto não encontrado com o ID ${id}`,
+    });
+  }
+
+  // Remover o produto do array
+  const removedProduct = products.splice(productIndex, 1)[0];
+  console.log("Produto removido:", removedProduct);
+
+  return res.status(200).json({
+    success: true,
+    message: "Produto removido com sucesso",
+    data: removedProduct,
+  });
 };
 
 module.exports = {
@@ -73,4 +96,5 @@ module.exports = {
   getOneProducts,
   createProduct,
   updateProduct,
+  removeProduct,
 };
