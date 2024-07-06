@@ -31,6 +31,8 @@ getOneProducts = async (req, res) => {
 createProduct = async (req, res) => {
   try {
     const product = req.body;
+    const { name, description, price } = req.body;
+    const image = req.file ? req.file.filename : null;
     if (Object.keys(product).length > 0) {
       const newProduct = await prisma.product.create({
         data: product,
