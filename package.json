@@ -2,9 +2,13 @@
   "name": "api-products",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "14x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.js"
+    "start": "nodemon src/server.js",
+    "run": "node src/server.js"
   },
   "keywords": [],
   "author": "",
