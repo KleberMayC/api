@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/v1/products", procuctRoute); //rota v1 product
+app.use("/", procuctRoute); //rota v1 product
 
-app.use("/", userRoute);
+app.use("/", userRoute); //rota 
 
 module.exports = app;
